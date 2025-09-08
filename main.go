@@ -18,7 +18,7 @@ type Response struct{
 func healthCheckpoint(w http.ResponseWriter,r *http.Request){
 	w.Header().Set("Content-Type","application/json")
 	 temp :=  Response{
-		Message: "Healthy server.",
+		Message: "Abenao thibaikooooonnn 🐽🐽",
 	 }
 	 json.NewEncoder(w).Encode(temp)
 }
@@ -56,8 +56,6 @@ func main(){
 
 func LoggerMiddleware(next http.Handler)http.Handler{
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		start := time.Now()
-		// Extract real client IP
 		ip := r.Header.Get("X-Real-IP")
 		if ip == "" {
 			ip = r.Header.Get("X-Forwarded-For")
@@ -67,6 +65,5 @@ func LoggerMiddleware(next http.Handler)http.Handler{
 		}
 		log.Println("Request from:", ip)
 		next.ServeHTTP(w,r)
-		log.Printf("It took %f seconds to process the last request.",time.Since(start).Seconds())
 	})
 }
