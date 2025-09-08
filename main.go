@@ -56,9 +56,10 @@ func main(){
 
 func LoggerMiddleware(next http.Handler)http.Handler{
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		start := time.Now()
+		// start := time.Now()
 		log.Println(r.RemoteAddr)
 		next.ServeHTTP(w,r)
-		fmt.Printf("It took %f seconds to process the last request.",time.Since(start).Seconds())
+		// fmt.Printf("It took %f seconds to process the last request.",time.Since(start).Seconds())
+		fmt.Println("End of middleware")
 	})
 }
