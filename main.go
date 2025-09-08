@@ -42,7 +42,7 @@ func main(){
 	}()
 
 	<- ctx.Done()
-	log.Println("Server shutting down...")
+	log.Println("Server shutting down.")
 
 	timerCtx,close := context.WithTimeout(context.Background(), 5 *time.Second)
 	defer close()
