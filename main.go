@@ -57,7 +57,15 @@ func main(){
 func LoggerMiddleware(next http.Handler)http.Handler{
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now()
-		log.Println(r.RemoteAddr)
+		// Extract real client IP
+		ip := r.Header.Get("X-Real-IP")
+		if ip == "" {
+			ip = r.Header.Get("X-Forwarded-For")
+		}
+		if ip == "" {
+			ip = r.RemoteAddr
+		}
+		log.Println("Request from:", ip)
 		next.ServeHTTP(w,r)
 		log.Printf("It took %f seconds to process the last request.",time.Since(start).Seconds())
 	})
