@@ -26,15 +26,15 @@ jobs:
           # build-args: |
           #   DATABASE_URL=${{ secrets.DATABASE_URL }}
 
-      # - name: Deploy to VM
-      #   uses: appleboy/ssh-action@master
-      #   with:
-      #     host: ${{ secrets.VM_HOST }}
-      #     username: root
-      #     key: ${{ secrets.VM_SSH_KEY }}
-      #     port: 22
-      #     script: |
-      #       docker pull arvindkhoisnam/go-server:${{ github.sha }}
-      #       docker stop go-server || true
-      #       docker rm go-server || true
-      #       docker run -d --name go-server -p 8080:8080 arvindkhoisnam/go-server:${{ github.sha }}
+      - name: Deploy to VM
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: root
+          key: ${{ secrets.VM_SSH_KEY }}
+          port: 22
+          script: |
+            docker pull arvindkhoisnam/go-server:${{ github.sha }}
+            docker stop go-server || true
+            docker rm go-server || true
+            docker run -d --name go-server -p 8080:8080 arvindkhoisnam/go-server:${{ github.sha }}
