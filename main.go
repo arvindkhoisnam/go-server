@@ -16,7 +16,7 @@ type Response struct{
 }
 
 func healthCheckpoint(w http.ResponseWriter,r *http.Request){
-	w.Header().Set("Content-Type","applicaiton/json")
+	w.Header().Set("Content-Type","application/json")
 	 temp :=  Response{
 		Message: "Healthy server.",
 	 }
